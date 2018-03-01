@@ -5,6 +5,8 @@ OS := $(shell uname)
 
 ifeq ($(OS), Darwin)
 libs = -lglfw -framework OpenGL
+else ifeq ($(OS), Linux)
+libs = -ldl -lglfw -lGL -lGLU
 endif
 
 $(target): $(objs)
@@ -15,5 +17,6 @@ run:
 
 .PHONY : clean
 clean :
-	-rm $(target) $(objs)
+	-rm -f $(target) $(objs)
 
+dev: clean $(target) run
