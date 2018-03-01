@@ -1,5 +1,5 @@
 target = sample
-objs = main.o ../glad/glad.o
+objs = main.cpp ../glad/glad.c
 flags = -I ../include
 OS := $(shell uname)
 
@@ -10,7 +10,7 @@ libs = -ldl -lglfw -lGL -lGLU
 endif
 
 $(target): $(objs)
-	g++ $(objs) -o sample  $(flags) $(libs)
+	g++ $^ -o $@ $(libs) $(flags)
 
 .PHONY: clean dev run
 
@@ -18,6 +18,6 @@ run:
 	./$(target)
 
 clean:
-	-rm -f $(target) $(objs)
+	-rm -f $(target)
 
 dev: clean $(target) run
